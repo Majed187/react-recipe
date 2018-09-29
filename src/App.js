@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Form from "./copmonentes/Form";
 
+import Recipes from "./copmonentes/Recipes";
+
 const API_KEY = "7390c7e600a58001fa5c48ec5a36ba7e";
 const baseURL = `https://cors-anywhere.herokuapp.com/https://food2fork.com/api/`;
 
@@ -12,11 +14,10 @@ class App extends Component {
   getRecipe = async recipeName => {
     try {
       const endPoint = `${baseURL}search?key=${API_KEY}
-&q=${recipeName}%20`;
+&q=${recipeName}`;
 
       const api = await fetch(endPoint);
       const data = await api.json();
-
       this.setState({
         recipes: data.recipes
       });
@@ -30,9 +31,7 @@ class App extends Component {
     return (
       <div className=" container App">
         <Form getRecipe={this.getRecipe} />
-        {this.state.recipes.map(recipe => {
-          return <p key={recipe.recipe_id}>{recipe.title}</p>;
-        })}
+        <Recipes recipes={this.state.recipes} />
       </div>
     );
   }
