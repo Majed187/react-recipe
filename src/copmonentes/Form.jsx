@@ -13,7 +13,6 @@ class Form extends Component {
   render() {
     return (
       <div className="container">
-        <h2>Search your favorite Food</h2>
         <form
           className="form input-group input-group-lg my-5   "
           onSubmit={this.eventHandler}
@@ -21,7 +20,7 @@ class Form extends Component {
           <input
             type="text"
             className="form-control h4"
-            placeholder="Enter your City "
+            placeholder="Enter your favorite food "
             name="recipeName"
             required
           />
