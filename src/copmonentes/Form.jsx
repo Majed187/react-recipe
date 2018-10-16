@@ -7,7 +7,6 @@ class Form extends Component {
   eventHandler = e => {
     e.preventDefault();
     const recipeName = e.target.elements.recipeName.value;
-    console.log(recipeName);
     this.props.getRecipe(recipeName);
   };
   render() {

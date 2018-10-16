@@ -1,27 +1,40 @@
 import React, { Component } from "react";
 
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-const API_KEY = "7390c7e600a58001fa5c48ec5a36ba7e";
+const API_KEY = "7ec04121bf0cca67ad57e00b7967e8e2";
 const baseURL = `https://cors-anywhere.herokuapp.com/https://food2fork.com/api/`;
 
 class Recipe extends Component {
   state = {
     recipeState: []
   };
-  componentDidMount = async () => {
+
+  mounted = false;
+
+  getRecipe = async () => {
     const title = this.props.location.state.recipe;
-    const req = await fetch(`${baseURL}search?key=${API_KEY}&q=${title}`);
-    const res = await req.json();
-    console.log(res);
-    this.setState({
-      recipeState: res.recipes[0]
-    });
+    const data = await axios(`${baseURL}search?key=${API_KEY}&q=${title}`);
+
+    if (this.mounted) {
+      this.setState({ recipeState: data.data.recipes[0] });
+    }
   };
+
+  componentDidMount = props => {
+    this.mounted = true;
+    this.getRecipe();
+  };
+  componentWillUnmount = () => {
+    this.mounted = false;
+  };
+
   render() {
     const recipe = this.state.recipeState;
+
     return (
-      <div className="d-flex justify-content-center  mx-5 py-5">
+      <div className="d-flex justify-content-center recipe  mx-5 py-5">
         <div className="">
           <img
             className="recipe_img"

@@ -3,8 +3,9 @@ import Form from "./copmonentes/Form";
 
 import Recipes from "./copmonentes/Recipes";
 
-const API_KEY = "969e30909b4857ca9a32db801b10ed89";
-const baseURL = `https://cors-anywhere.herokuapp.com/https://food2fork.com/api/`;
+import axios from "axios";
+const API_KEY = "7ec04121bf0cca67ad57e00b7967e8e2";
+const baseURL = `https://cors-anywhere.herokuapp.com/http://food2fork.com/api/`;
 
 class App extends Component {
   state = {
@@ -12,15 +13,13 @@ class App extends Component {
   };
 
   getRecipe = async recipeName => {
-    const endPoint = `${baseURL}search?key=${API_KEY}
-&q=${recipeName}`;
-
-    const api = await fetch(endPoint);
-    const data = await api.json();
-
+    const endPoint = `${baseURL}search?key=${API_KEY}&q=${recipeName}`;
+    const data = await axios.get(endPoint);
+    console.log(data);
     this.setState({
-      recipes: data.recipes
+      recipes: data.data.recipes
     });
+
     console.log(this.state.recipes);
   };
   componentDidMount = () => {

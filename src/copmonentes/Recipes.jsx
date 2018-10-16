@@ -1,27 +1,37 @@
-import React, { Component } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
-class Recipes extends Component {
-  render() {
-    return (
-      <div className="container">
-        <div className="row">
-          {this.props.recipes.map(recipe => {
+const Recipes = props => {
+  console.log(props.recipes);
+  return (
+    <div className="container">
+      <div className="row">
+        {props.recipes &&
+          props.recipes.map(recipe => {
             return (
-              <div className="col-md-4 mt-2 ">
+              <div key={recipe.recipe_id} className="col-md-4 mt-2 ">
                 <div className="box ">
                   <img src={recipe.image_url} alt={recipe.title} />
-                  <h3 className=" ">{recipe.title}</h3>
+                  <h3>{recipe.title}</h3>
                   <button type="button" className="btn btn-success mt-2 ml-2">
-                    SEE RECIPE
+                    <Link
+                      to={{
+                        pathname: `/recipe/${recipe.recipe_id}`,
+                        state: {
+                          recipe: recipe.title
+                        }
+                      }}
+                    >
+                      SEE RECIPE
+                    </Link>
                   </button>
                 </div>
               </div>
             );
           })}
-        </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Recipes;

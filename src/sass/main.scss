@@ -18,9 +18,23 @@ body {
     width: 100%;
     height: 220px;
   }
+  .recipe {
+    height: 90vh;
+  }
   .recipe_img {
     margin-top: 20px;
     height: 500px;
     width: auto;
+  }
+  h1 {
+    font-weight: normal;
+
+    color: #34495e;
+    text-align: center;
+    margin: 0 auto 40px 0;
+  }
+  h1:first-letter {
+    color: #000;
+    border-bottom: 2px solid #000;
   }
 }
