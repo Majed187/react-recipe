@@ -1,6 +1,6 @@
 # react-recipe
 
-## app help you to find your favourite food
+## app help you to find your favorite food
 
  ## to start the app use :
  
